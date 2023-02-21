@@ -7,6 +7,7 @@ import (
 
 	"github.com/Abrar-Ahmed7/rest-api-go/internal/db"
 	"github.com/Abrar-Ahmed7/rest-api-go/internal/handler"
+	bookgormimpl "github.com/Abrar-Ahmed7/rest-api-go/internal/repo/book/gormimpl"
 	usergormimpl "github.com/Abrar-Ahmed7/rest-api-go/internal/repo/user/gormimpl"
 	"github.com/Abrar-Ahmed7/rest-api-go/internal/service"
 	"github.com/gin-gonic/gin"
@@ -48,9 +49,16 @@ func main() {
 	log.Println("Migration Successful or Already Migrated")
 
 	ur := usergormimpl.NewGormUserRepo(dbConn)
+	br := bookgormimpl.NewGormBookRepo(dbConn)
+
 	us := service.NewUserService(ur)
+	bs := service.NewBookService(br)
+
+	bh := handler.NewBookHandler(bs)
 	uh := handler.NewUserHandler(us)
+
 	uh.RegisterRoutes(router)
+	bh.RegisterRoutes(router)
 
 	srv := &http.Server{
 		Addr:    ":8080",

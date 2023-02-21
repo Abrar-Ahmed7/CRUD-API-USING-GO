@@ -12,7 +12,7 @@ type userService struct {
 }
 
 type UserService interface {
-	Save() string
+	Save(name, emailId string) string
 }
 
 func NewUserService(ur user.UserRepo) UserService {
@@ -21,10 +21,10 @@ func NewUserService(ur user.UserRepo) UserService {
 	}
 }
 
-func (us userService) Save() string {
+func (us userService) Save(name, emailId string) string {
 	u := model.User{
-		Name:      "Alice",
-		Email:     "alice@gmail.com",
+		Name:      name,
+		Email:     emailId,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
