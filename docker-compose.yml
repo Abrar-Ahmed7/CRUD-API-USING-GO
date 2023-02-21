@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  mysql-crud-api:
+    container_name: mysql-crud-api
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=crud_api_db
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
