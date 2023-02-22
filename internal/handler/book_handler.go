@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/Abrar-Ahmed7/rest-api-go/internal/handler/request"
 	"github.com/Abrar-Ahmed7/rest-api-go/internal/service"
 	"github.com/gin-gonic/gin"
 )
@@ -32,13 +33,7 @@ func (bh bookHandler) RegisterRoutes(router *gin.RouterGroup) {
 }
 
 func (bh bookHandler) Create(c *gin.Context) {
-	type BookReqBody struct {
-		Title       string `json:"title" binding:"required,min=3,max=25"`
-		AuthorName  string `json:"author_name" binding:"required,min=3,max=25"`
-		Publication string `json:"publication" binding:"required,min=3,max=25"`
-	}
-
-	var req BookReqBody
+	var req request.CreateBookReqBody
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -76,12 +71,8 @@ func (bh bookHandler) GetBooks(c *gin.Context) {
 }
 
 func (bh bookHandler) UpdateBook(c *gin.Context) {
-	type BookReqBody struct {
-		Title       string `json:"title" binding:"min=3,max=25"`
-		AuthorName  string `json:"author_name" binding:"min=3,max=25"`
-		Publication string `json:"publication" binding:"min=3,max=25"`
-	}
-	var req BookReqBody
+
+	var req request.UpdateBookReqBody
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
