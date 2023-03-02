@@ -4,7 +4,7 @@
 - Here, we can create a user where user does CRUD operation on a book<br><br>
 
 - How?
-    - After clone the repo you need to follow the few steps:
+    - After cloning the repo you need to follow the few steps:
         - Run `make setup` command in the root directory using terminal
         - The above command will create and run a docker container that is built with `mysql` image
         - After that, `make run` command, this will do the DB schema migration and the server starts listening at `8080` port.
